@@ -2,6 +2,8 @@ library(tidyverse)
 
 ModifyTIDEresult <- function(gene){
 
+  target.gene <- gene
+  
   order_data_TUMOR <- hcc_T_fpkm[,order(hcc_T_fpkm[target.gene,],decreasing = TRUE)]
   order_data_TUMOR.normalized <- sweep(order_data_TUMOR, 1, rowMeans(order_data_TUMOR))
   
