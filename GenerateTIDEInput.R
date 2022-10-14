@@ -15,7 +15,8 @@ hcc_T_fpkm <- hcc_fpkm[,sapply(colnames(hcc_fpkm), function(x) unlist(strsplit(x
 
 GenerateTIDEinput <- function(gene){
   target.gene <- gene
-  dir.create(paste0("./", target.gene))
+  dir.create(paste0("./input_TIDE/", target.gene))
+  dir.create(paste0("./output_TIDE/", target.gene))
   
   order_data_TUMOR <- hcc_T_fpkm[,order(hcc_T_fpkm[target.gene,],decreasing = TRUE)]
   order_data_TUMOR.normalized <- sweep(order_data_TUMOR, 1, rowMeans(order_data_TUMOR))
