@@ -130,7 +130,3 @@ DrawTIDE <- function(file, gene){
   print(paste0("P-value (Chi-squared test) of MDSC score is ", TIDE.Response.stat$p.value))
 
 }
-
-file = read.csv("/Users/Karl/Downloads/R/Chengpeng/FRA1_TCGA_TIDE/first_last_25_TIDE.result.withFOSL1.expr.txt")
-gene = "FRA1"
-DrawTIDE(file, gene)
