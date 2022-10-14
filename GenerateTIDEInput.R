@@ -27,7 +27,7 @@ GenerateTIDEinput <- function(gene){
   first_last_25 <- order_data.normalized[,c(1:(ncol(order_data.normalized)*25/100),round(ncol(order_data.normalized)-(ncol(order_data.normalized)*25/100)+1):ncol(order_data.normalized))]
   first_last_30 <- order_data.normalized[,c(1:(ncol(order_data.normalized)*30/100),round(ncol(order_data.normalized)-(ncol(order_data.normalized)*30/100)+2):ncol(order_data.normalized))]
 
-  write.table(first_last_15, paste0('./output_TIDE/',target.gene,'_order_data_TUMOR.first_last_15_normalized.',target.gene,'.txt'), sep="\t", quote=F)
-  write.table(first_last_25, paste0('./output_TIDE/',target.gene,'_order_data_TUMOR.first_last_25_normalized.',target.gene,'.txt'), sep="\t", quote=F)
-  write.table(first_last_30, paste0('./output_TIDE/',target.gene,'_order_data_TUMOR.first_last_30_normalized.',target.gene,'txt'), sep="\t", quote=F)
+  write.table(first_last_15, paste0('./input_TIDE/',target.gene,'_order_data_TUMOR.first_last_15_normalized.',target.gene,'.txt'), sep="\t", quote=F)
+  write.table(first_last_25, paste0('./input_TIDE/',target.gene,'_order_data_TUMOR.first_last_25_normalized.',target.gene,'.txt'), sep="\t", quote=F)
+  write.table(first_last_30, paste0('./input_TIDE/',target.gene,'_order_data_TUMOR.first_last_30_normalized.',target.gene,'txt'), sep="\t", quote=F)
 }
