@@ -12,7 +12,7 @@ map <- map[rownames(hcc_fpkm),]
 rownames(hcc_fpkm) <- uniquifyFeatureNames(rownames(map),map$gene)
 ### Extract only tumor samples
 hcc_T_fpkm <- hcc_fpkm[,sapply(colnames(hcc_fpkm), function(x) unlist(strsplit(x, split="\\."))[4]) == "01A"]
-
+                               
 GenerateTIDEinput <- function(gene){
   target.gene <- gene
   dir.create(paste0("./input_TIDE/", target.gene))
@@ -20,9 +20,6 @@ GenerateTIDEinput <- function(gene){
   
   order_data_TUMOR <- hcc_T_fpkm[,order(hcc_T_fpkm[target.gene,],decreasing = TRUE)]
   order_data_TUMOR.normalized <- sweep(order_data_TUMOR, 1, rowMeans(order_data_TUMOR))
-
-  rowMeans(order_data_TUMOR.normalized)
-  order_data_TUMOR.normalized[target.gene,]
 
   order_data.normalized <- order_data_TUMOR.normalized
 
