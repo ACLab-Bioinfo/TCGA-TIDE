@@ -1,6 +1,8 @@
-library(scater)
-library(tidyverse)
-library(stringr)
+suppressPackageStartupMessages({
+  library(scater)
+  library(tidyverse)
+  library(stringr)
+})
 
 ### readDATA
 hcc_fpkm <- read.table(gzfile("./data/TCGA-LIHC.htseq_fpkm.tsv.gz"), header = TRUE, row.names = 1, sep = "\t")
