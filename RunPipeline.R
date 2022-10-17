@@ -7,7 +7,7 @@ gene_list <- unlist(read.table("./data/genelist.txt", quote = F))
 
 for(gene in gene_list){
   GenerateTIDEinput(gene)
-  system("bash ./scripts/RunTide.sh")
+  system(paste0("bash ./scripts/RunTide.sh ", gene))
   ModifyTIDEresult(gene)
   DrawTIDE(gene)
 }
