@@ -6,7 +6,7 @@ suppressPackageStartupMessages({
 
 ### readDATA
 hcc_fpkm <- read.table(gzfile("./data/TCGA-LIHC.htseq_fpkm.tsv.gz"), header = TRUE, row.names = 1, sep = "\t")
-hcc_fpkm <- read.table("./data/TCGA-LIHC.htseq_fpkm.tsv", header = TRUE, row.names = 1, sep = "\t")
+#hcc_fpkm <- read.table("./data/TCGA-LIHC.htseq_fpkm.tsv", header = TRUE, row.names = 1, sep = "\t")
 map <- read.table("./data/gencode.v22.annotation.gene.probeMap", header=T, row.names=1)
 map <- map[rownames(hcc_fpkm),]
 
