@@ -23,7 +23,7 @@ hcc_T_fpkm <- hcc_fpkm[,sapply(colnames(hcc_fpkm), function(x) unlist(strsplit(x
 gene_list <- read.table("./data/genelist.txt")[,1]
 
 for(gene in gene_list){
-  GenerateTIDEinput(gene)
+  GenerateTIDEinput(hcc_T_fpkm, gene)
   system(paste0("bash ./scripts/RunTide.sh ", gene))
   ModifyTIDEresult(gene)
   DrawTIDE(gene)
