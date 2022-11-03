@@ -1,5 +1,6 @@
-GenerateTIDEinput <- function(gene){
+GenerateTIDEinput <- function(hcc_T_fpkm, gene){
   target.gene <- gene
+  hcc_T_fpkm <- hcc_T_fpkm
   dir.create(paste0("./input_TIDE/", target.gene), recursive=TRUE)
   dir.create(paste0("./output_TIDE/", target.gene), recursive=TRUE)
 
