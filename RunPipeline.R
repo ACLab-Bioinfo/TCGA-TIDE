@@ -20,7 +20,7 @@ rownames(hcc_fpkm) <- uniquifyFeatureNames(rownames(map),map$gene)
 ### Extract only tumor samples
 hcc_T_fpkm <- hcc_fpkm[,sapply(colnames(hcc_fpkm), function(x) unlist(strsplit(x, split="\\."))[4]) == "01A"]
 
-gene_list <- unlist(read.table("./data/genelist.txt", quote = F))
+gene_list <- read.table("./data/genelist.txt")[,1]
 
 for(gene in gene_list){
   GenerateTIDEinput(gene)
@@ -28,4 +28,3 @@ for(gene in gene_list){
   ModifyTIDEresult(gene)
   DrawTIDE(gene)
 }
-
