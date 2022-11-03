@@ -1,11 +1,13 @@
-library(ggplot2)
-library(dplyr)
+suppressPackageStartupMessages({
+	library(ggplot2)
+	library(dplyr)
+})
 
 DrawTIDE <- function(gene){
   ### TIDE score
-  for(i in c("15","25","30"){
-    dir.create(paste0("./output_figure/", gene, "/",i, "_Percent"))
-    file <- read.csv("./output_TIDE/", gene, "/Modified.TIDE.result.first_last_", i,".with.",target.gene,".expr.txt")
+  for(i in c("15","25","30")){
+    dir.create(paste0("./output_figure/", gene, "/",i, "_Percent"), recursive=TRUE)
+    file <- read.csv(paste0("./output_TIDE/", gene, "/Modified.TIDE.result.first_last_", i,".with.",gene,".expr.txt"))
     pdf(paste0("./output_figure/", gene, "/", i, "_Percent/Vlnplot.TIDEscore.pdf"), width = 4, height = 4)
     p1 <- ggplot(file, aes(x=expr_high_or_low, y=TIDE, fill=expr_high_or_low)) + # y = TIDE/ Dysfunction/ Exclusion/ MDSC score
       geom_violin(width=0.7, trim = FALSE) +
@@ -88,7 +90,7 @@ DrawTIDE <- function(gene){
         axis.text.y = element_text(size = 16, face = "bold"), # 2, 1, 0, -1, -2
         axis.title = element_text(size = 15, face = "bold"))+
       coord_cartesian(ylim = c(-2,2)) +
-      scale_x_continuous(expand = c(0, 0.5)) + 
+      scale_x_continuous(expand = c(0, 0.5)) +
       scale_y_continuous(expand = c(0, 0))
     print(p5)
     dev.off()
@@ -107,16 +109,16 @@ DrawTIDE <- function(gene){
     MDSC.y = file$MDSC[file$expr_high_or_low == "low"]
     MDSC.stat <- t.test(MDSC.x, MDSC.y, alternative = "greater")
 
-    H_R = file %>% 
+    H_R = file %>%
       filter(Responder == "True" & expr_high_or_low == 'high')
 
-    H_NR = file %>% 
+    H_NR = file %>%
       filter(Responder == "False" & expr_high_or_low == 'high')
 
-    L_R = file %>% 
+    L_R = file %>%
       filter(Responder == "True" & expr_high_or_low == 'low')
 
-    L_NR = file %>% 
+    L_NR = file %>%
       filter(Responder == "False" & expr_high_or_low == 'low')
 
     TIDE.Response.stat <- chisq.test(data.frame(
@@ -124,14 +126,14 @@ DrawTIDE <- function(gene){
       Non.Responder = c(nrow(H_NR),nrow(L_NR)),
       row.names = c("High","Low"))
     )
-    
+
     df <- data.frame(TIDE.stat = TIDE.stat$p.value,
                     Dysfunction.stat = Dysfunction.stat$p.value,
                     Exclusion.stat$p.value,
                     MDSC.stat$p.value,
-                    TIDE.Response.stat$p.value) 
-    write.csv(df, "./output_figure/", gene, "/", i, "_Percent/stats.txt")
-    
+                    TIDE.Response.stat$p.value)
+    write.csv(df, paste0("./output_figure/", gene, "/", i, "_Percent/stats.txt"))
+
     # print(paste0("P-value (t test) of TIDE score is ", TIDE.stat$p.value))
     # print(paste0("P-value (t test) of Dysfunction score is ", Dysfunction.stat$p.value))
     # print(paste0("P-value (t test) of Exclusion score is ", Exclusion.stat$p.value))
