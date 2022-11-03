@@ -1,5 +1,7 @@
 #!/bin/sh
 
+gene=$1
+
 Input_file1="./input_TIDE/${gene}/order_data_TUMOR.first_last_15_normalized.${gene}.txt"
 Input_file2="./input_TIDE/${gene}/order_data_TUMOR.first_last_25_normalized.${gene}.txt"
 Input_file3="./input_TIDE/${gene}/order_data_TUMOR.first_last_30_normalized.${gene}.txt"
