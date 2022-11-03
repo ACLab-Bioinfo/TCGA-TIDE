@@ -1,9 +1,8 @@
-                               
 GenerateTIDEinput <- function(gene){
   target.gene <- gene
-  dir.create(paste0("./input_TIDE/", target.gene))
-  dir.create(paste0("./output_TIDE/", target.gene))
-  
+  dir.create(paste0("./input_TIDE/", target.gene), recursive=TRUE)
+  dir.create(paste0("./output_TIDE/", target.gene), recursive=TRUE)
+
   order_data_TUMOR <- hcc_T_fpkm[,order(hcc_T_fpkm[target.gene,],decreasing = TRUE)]
   order_data_TUMOR.normalized <- sweep(order_data_TUMOR, 1, rowMeans(order_data_TUMOR))
 
@@ -15,5 +14,5 @@ GenerateTIDEinput <- function(gene){
 
   write.table(first_last_15, paste0('./input_TIDE/',target.gene,'/order_data_TUMOR.first_last_15_normalized.',target.gene,'.txt'), sep="\t", quote=F)
   write.table(first_last_25, paste0('./input_TIDE/',target.gene,'/order_data_TUMOR.first_last_25_normalized.',target.gene,'.txt'), sep="\t", quote=F)
-  write.table(first_last_30, paste0('./input_TIDE/',target.gene,'/order_data_TUMOR.first_last_30_normalized.',target.gene,'txt'), sep="\t", quote=F)
+  write.table(first_last_30, paste0('./input_TIDE/',target.gene,'/order_data_TUMOR.first_last_30_normalized.',target.gene,'.txt'), sep="\t", quote=F)
 }
